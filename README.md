@@ -7,7 +7,10 @@
 
 
 Создание объекта класса Capsule и инициализация этого объекта констанстами:
+
 ```php
+//php code 
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 $dotenv = new Dotenv\Dotenv('/.env');
@@ -30,27 +33,63 @@ $capsule->addConnection([
 }
 ```
 
+Использование ORM Eloquent:
+
+```php
+  //php code
+
+  class User extends Illuminate\Database\Eloquent\Model {}
+  $users = User::where('verified', '=', TRUE)->get();
+```
 
 
 ### 2. Используется кеш в памяти для временного хранения сложных запросов к БД
+[watson/rememberable](https://packagist.org/packages/watson/rememberable)
+
+Кэширование запросов для Laravel. Результаты запросов кэшируются в течение заданного промежутка времени.
+
+Получить статьи первого пользователя и запомнить их на 6 часов :
 
 ```php
-
+  //php code 
+  User::first()->remember(360)->posts()->get();
 ```
 
 ### 3. Формируются XLS-отчеты на основе данных
-
-```php
-
-```
-
+[phpoffice/phpspreadsheet](https://packagist.org/packages/phpoffice/phpspreadsheet)
 
 ### 4. Формируются PDF-документы на основе данных
+[phpoffice/phpspreadsheet](https://packagist.org/packages/phpoffice/phpspreadsheet)
 
 
 ### 5. Отправляются SMS-сообщения для верификации пользователей
+[twilio/sdk](https://packagist.org/packages/twilio/sdk)
 
+PHP обетка для API Twilio.
 
+Отправка sms:
+
+```php
+
+	public function sendSms(Request $request)
+	{
+  	$accountSid = getenv(TWILIO_ACCOUNT_SID); // присваивается при регистрации на twilio
+	  $authToken = getenv(TWILIO_AUTH_TOKEN); // присваивается при регистрации на twilio
+    
+		$code = rand(1000, 9999); // генерация 4-х значного кода
+		$request['code'] = $code; 
+    
+    $client = new Twilio\Rest\Client($sid, $token);
+    $message = $client->messages->create(
+      $request->phone_number, // номер, на который высылаем
+
+      array(
+      'from' => '17637106051', // номер, арендованный на twilio
+      'body' => 'CODE: '. $request->code
+      )
+    );
+	}
+```
 ### 6. Отправляются E-mail-уведомления и рассылки для пользователей
 
 
