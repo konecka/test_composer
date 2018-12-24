@@ -71,24 +71,24 @@ PHP обетка для API Twilio.
 
 ```php
 
-	public function sendSms(Request $request)
-	{
-  	$accountSid = getenv(TWILIO_ACCOUNT_SID); // присваивается при регистрации на twilio
-	  $authToken = getenv(TWILIO_AUTH_TOKEN); // присваивается при регистрации на twilio
-    
-		$code = rand(1000, 9999); // генерация 4-х значного кода
-		$request['code'] = $code; 
-    
-    $client = new Twilio\Rest\Client($sid, $token);
-    $message = $client->messages->create(
-      $request->phone_number, // номер, на который высылаем
+public function sendSms(Request $request)
+{
+$accountSid = getenv(TWILIO_ACCOUNT_SID); // присваивается при регистрации на twilio
+  $authToken = getenv(TWILIO_AUTH_TOKEN); // присваивается при регистрации на twilio
 
-      array(
-      'from' => '17637106051', // номер, арендованный на twilio
-      'body' => 'CODE: '. $request->code
-      )
-    );
-	}
+$code = rand(1000, 9999); // генерация 4-х значного кода
+$request['code'] = $code; 
+
+$client = new Twilio\Rest\Client($sid, $token);
+$message = $client->messages->create(
+$request->phone_number, // номер, на который высылаем
+
+array(
+'from' => '17637106051', // номер, арендованный на twilio
+'body' => 'CODE: '. $request->code
+)
+);
+}
 ```
 ### 6. Отправляются E-mail-уведомления и рассылки для пользователей
 
