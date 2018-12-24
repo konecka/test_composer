@@ -58,10 +58,11 @@ User::first()->remember(360)->posts()->get();
 
 ### 3. Формируются XLS-отчеты на основе данных
 [phpoffice/phpspreadsheet](https://packagist.org/packages/phpoffice/phpspreadsheet)
+Библиотека предоставляющая набор классов для чтения и записи различных форматов файлов электронных таблиц.
 
 ### 4. Формируются PDF-документы на основе данных
-[phpoffice/phpspreadsheet](https://packagist.org/packages/phpoffice/phpspreadsheet)
-
+[tecnickcom/tcpdf](https://packagist.org/packages/tecnickcom/tcpdf)
+PHP библиотека для генерации PDF документов
 
 ### 5. Отправляются SMS-сообщения для верификации пользователей
 [twilio/sdk](https://packagist.org/packages/twilio/sdk)
@@ -95,6 +96,29 @@ public function sendSms(Request $request)
 
 ### 6. Отправляются E-mail-уведомления и рассылки для пользователей
 [swiftmailer/swiftmailer](https://packagist.org/packages/swiftmailer/swiftmailer)
+
+Библиотека для отправки электронных сообщений.
+
+Пример отправки сообщения:
+
+```php
+require_once '/path/to/vendor/autoload.php';
+
+$transport = (new Swift_SmtpTransport('smtp.hostname', 25))
+  ->setUsername('username')
+  ->setPassword('password')
+;
+
+$mailer = new Swift_Mailer($transport);
+
+$message = (new Swift_Message('Wonderful Subject'))
+  ->setFrom(['john@doe.com' => 'John Doe'])
+  ->setTo(['receiver@domain.org', 'other@domain.org' => 'A name'])
+  ->setBody('Here is the message itself')
+  ;
+
+$result = $mailer->send($message);
+```
 
 ### 7. Используется облачное хранилище AWS S3 или Windows Azure Blob для статичных файлов
 [aws/aws-sdk-php](https://packagist.org/packages/aws/aws-sdk-php)
