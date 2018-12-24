@@ -51,6 +51,7 @@ $capsule->addConnection([
 Получить статьи первого пользователя и запомнить их на 6 часов :
 
 ```php
+
 //php code 
 User::first()->remember(360)->posts()->get();
 ```
@@ -70,6 +71,7 @@ PHP обетка для API Twilio.
 Отправка sms:
 
 ```php
+// php code
 
 public function sendSms(Request $request)
 {
@@ -90,22 +92,59 @@ public function sendSms(Request $request)
   );
 }
 ```
+
 ### 6. Отправляются E-mail-уведомления и рассылки для пользователей
 
 
 ### 7. Используется облачное хранилище AWS S3 или Windows Azure Blob для статичных файлов
+[aws/aws-sdk-php](https://packagist.org/packages/aws/aws-sdk-php)
 
+Пакет для создание php-приложений с использованием сервисов Amazon (Amazon S3, Amazon DynamoDB, Amazon Glacier)
+
+```php
+// php code
+
+require 'vendor/autoload.php';
+
+use Aws\S3\S3Client;
+
+// Настройка клиента для S3, указание региона и последней версии
+$s3 = new Aws\S3\S3Client([
+    'version' => 'latest',
+    'region'  => 'us-east-1'
+]);
+
+// Отправка запроса PutObject
+$s3Client->putObject([
+    'Bucket' => 'bucket',
+    'Key'    => 'key',
+    'Body'   => 'body'
+]);
+
+// Загрузка объекта
+$result = $s3Client->getObject([
+    'Bucket' => 'bucket',
+    'Key'    => 'key'
+]);
+
+// Удаление контейнера
+$client->deleteBucket([
+    'Bucket' => 'test-bucket',
+]);
+```
 
 ### 8. Используется интеграция со службой доставки для расчета стоимости (например, PickPoint или Почта России)
+[]()
 
 
 ### 9. Используется интеграция с социальными сетями для авторизации пользователей
-
+[]()
 
 ### 10. Данные о товарах регулярно отправляются в Яндекс.Маркет
-
+[]()
 
 ### 11. Принимается онлайн-оплата от покупателей
-
+[]()
 
 ### 12. Применяются средства тестирования (например, PHPUnit)
+[]()
