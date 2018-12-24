@@ -94,7 +94,7 @@ public function sendSms(Request $request)
 ```
 
 ### 6. Отправляются E-mail-уведомления и рассылки для пользователей
-
+[swiftmailer/swiftmailer](https://packagist.org/packages/swiftmailer/swiftmailer)
 
 ### 7. Используется облачное хранилище AWS S3 или Windows Azure Blob для статичных файлов
 [aws/aws-sdk-php](https://packagist.org/packages/aws/aws-sdk-php)
@@ -141,7 +141,7 @@ PickPoint API
 ### 9. Используется интеграция с социальными сетями для авторизации пользователей
 [hybridauth/hybridauth](https://packagist.org/packages/hybridauth/hybridauth)
 
-PHP библиотека для интеграции с социальными сетями. Возможна авторизация на сойте через Facebook, Twitter и Google
+PHP библиотека для интеграции с социальными сетями. Возможна авторизация на сойте через Facebook, Twitter и Google.
 
 Аутентификация с помощью GitHub:
 
@@ -161,10 +161,33 @@ $userProfile = $github->getUserProfile();
 ```
 
 ### 10. Данные о товарах регулярно отправляются в Яндекс.Маркет
-[]()
+[yandex-market/yandex-market-php-partner](https://packagist.org/packages/yandex-market/yandex-market-php-partner)
+Партнерский API Яндекс.Маркета
 
 ### 11. Принимается онлайн-оплата от покупателей
-[]()
+[trustly/trustly-client-php](https://packagist.org/packages/trustly/trustly-client-php)
+Релизация онлайн-платежей.
 
 ### 12. Применяются средства тестирования (например, PHPUnit)
-[]()
+[phpunit/phpunit](https://packagist.org/packages/phpunit/phpunit)
+PHP фреймворк для модульного тестирования.
+
+```php
+use PHPUnit\Framework\TestCase;
+
+class StackTest extends TestCase
+{
+  public function testPushAndPop()
+  {
+    $stack = [];
+    $this->assertSame(0, count($stack));
+
+    array_push($stack, 'foo');
+    $this->assertSame('foo', $stack[count($stack)-1]);
+    $this->assertSame(1, count($stack));
+
+    $this->assertSame('foo', array_pop($stack));
+    $this->assertSame(0, count($stack));
+  }
+}
+```
