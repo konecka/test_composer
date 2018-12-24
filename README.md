@@ -134,11 +134,31 @@ $client->deleteBucket([
 ```
 
 ### 8. Используется интеграция со службой доставки для расчета стоимости (например, PickPoint или Почта России)
-[]()
+[domatskiy/pickpoint](https://packagist.org/packages/domatskiy/pickpoint)
 
+PickPoint API
 
 ### 9. Используется интеграция с социальными сетями для авторизации пользователей
-[]()
+[hybridauth/hybridauth](https://packagist.org/packages/hybridauth/hybridauth)
+
+PHP библиотека для интеграции с социальными сетями. Возможна авторизация на сойте через Facebook, Twitter и Google
+
+Аутентификация с помощью GitHub:
+
+```php
+// php code
+
+include 'vendor/autoload.php';
+
+$config = [
+    'callback' => 'https://example.com/path/to/script.php',
+    'keys' => [ 'id' => 'your-app-id', 'secret' => 'your-app-secret' ]
+];
+
+$github = new Hybridauth\Provider\GitHub($config);
+$github->authenticate();
+$userProfile = $github->getUserProfile();
+```
 
 ### 10. Данные о товарах регулярно отправляются в Яндекс.Маркет
 []()
